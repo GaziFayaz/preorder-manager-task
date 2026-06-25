@@ -11,3 +11,26 @@ generator client {
 datasource db {
   provider = "sqlite"
 }
+
+model preorder {
+  id              String         @id @default(uuid())
+  name            String
+  productsCovered Int
+  preorderCase    PreorderCase
+  startDate       DateTime
+  endDate         DateTime?
+  status          PreorderStatus @default(ACTIVE)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum PreorderCase {
+  REGARDLESS_OF_STOCK
+  OUT_OF_STOCK
+}
+
+enum PreorderStatus {
+  ACTIVE
+  INACTIVE
+}
